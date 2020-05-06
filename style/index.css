@@ -1,0 +1,20 @@
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  position: relative;
+  color: #000;
+}
+
+.title {
+  font-size: 36pt;
+  display: none;
+}
+
+#app-holder {
+  margin: 20px;
+}
