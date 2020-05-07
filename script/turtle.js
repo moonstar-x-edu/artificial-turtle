@@ -2,16 +2,20 @@ const TURTLE_SIZE = 70;
 
 function Turtle() {
   this.pos = createVector(random(0, width - TURTLE_SIZE), random(0, height - TURTLE_SIZE));
-  this.shouldImageInvert = false;
   this.movementThreshold = random(1, 2) * FRAMERATE;
   this.frameCounter = random(0, FRAMERATE);
   this.movementDelta = [0, 0];
   this.shouldMove = false;
+  this.image = turtleImage;
 
   this.display = function() {
-    const img = this.shouldImageInvert ? turtleImage : turtleImageInverted;
+    if (this.movementDelta[0] < 0) {
+      this.image = turtleImage;
+    } else if (this.movementDelta[0] > 0) {
+      this.image = turtleImageInverted;
+    }
 
-    return image(img, this.pos.x, this.pos.y, TURTLE_SIZE, TURTLE_SIZE);
+    return image(this.image, this.pos.x, this.pos.y, TURTLE_SIZE, TURTLE_SIZE);
   }
 
   this.updateThreshold = function() {
