@@ -24,11 +24,8 @@ function setup() {
   const canvas = createCanvas(600, 600);
   canvas.parent("#app-holder");
   
-  player = new Player();
-  const numOfTurtles = random(2, 4);
-  for (let i = 0; i < numOfTurtles; i++) {
-    turtles.push(new Turtle(i));
-  }
+  turtlesSpawnHelper();
+  player = playerSpawnHelper();
 
   frameRate(FRAMERATE);
 }
@@ -49,5 +46,26 @@ function draw() {
     player.moveLeft();
   } if (keyIsDown(RIGHT_ARROW) || keyIsDown(KEY_D)) {
     player.moveRight();
+  }
+}
+
+function playerSpawnHelper() {
+  let player = new Player();
+  while (player.clipsWithTurtles()) {
+    player = new Player();
+  }
+  return player;
+}
+
+function turtlesSpawnHelper() {
+  const numOfTurtles = random(2, 4);
+  for (let i = 0; i < numOfTurtles; i++) {
+    let turtle = new Turtle(i);
+
+    while (turtle.clipsWithTurtles() || turtle.clipsWithPlayer()) {
+      turtle = new Turtle(i);
+    }
+
+    turtles.push(turtle);
   }
 }

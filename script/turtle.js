@@ -61,7 +61,7 @@ function Turtle(id) {
       if (turtle.id === this.id) {
         continue;
       }
-      
+
       if (Math.abs(newCenter[1] - turtle.getCenter()[1]) < MAX_DISTANCE_PT
       && Math.abs(newCenter[0] - turtle.getCenter()[0]) < MAX_DISTANCE_PT) {
         return;
@@ -90,5 +90,22 @@ function Turtle(id) {
     rect(this.pos.x, this.pos.y + TURTLE_SIZE, 2, 2);
     rect(this.pos.x + TURTLE_SIZE, this.pos.y, 2, 2);
     rect(this.pos.x + TURTLE_SIZE, this.pos.y + TURTLE_SIZE, 2, 2);
+  }
+
+  this.clipsWithTurtles = function() {
+    for (const turtle of turtles) {
+      if (Math.abs(this.getCenter()[1] - turtle.getCenter()[1]) < MAX_DISTANCE_PT
+      && Math.abs(this.getCenter()[0] - turtle.getCenter()[0]) < MAX_DISTANCE_PT) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  this.clipsWithPlayer = function() {
+    return (
+      Math.abs(this.getCenter()[1] - getDefaultPlayerCenter()[1]) < MAX_DISTANCE_PT &&
+      Math.abs(this.getCenter()[0] - getDefaultPlayerCenter()[0]) < MAX_DISTANCE_PT
+    );
   }
 }

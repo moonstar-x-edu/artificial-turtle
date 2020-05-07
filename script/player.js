@@ -1,8 +1,9 @@
 const PLAYER_SIZE = 70;
 const MAX_DISTANCE_PT = (TURTLE_SIZE + PLAYER_SIZE) / 2;
+const DEFAULT_PLAYER_SPAWN = [100, 450];
 
 function Player() {
-  this.pos = createVector(random(0, width - PLAYER_SIZE), random(0, width - PLAYER_SIZE));
+  this.pos = createVector(DEFAULT_PLAYER_SPAWN[0], DEFAULT_PLAYER_SPAWN[1]);
   this.shouldImageInvert = true;
 
   this.display = function() {
@@ -103,4 +104,21 @@ function Player() {
     rect(this.pos.x + PLAYER_SIZE, this.pos.y, 2, 2);
     rect(this.pos.x + PLAYER_SIZE, this.pos.y + PLAYER_SIZE, 2, 2);
   }
+
+  this.clipsWithTurtles = function() {
+    for (const turtle of turtles) {
+      if (Math.abs(this.getCenter()[1] - turtle.getCenter()[1]) < MAX_DISTANCE_PT
+      && Math.abs(this.getCenter()[0] - turtle.getCenter()[0]) < MAX_DISTANCE_PT) {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+
+function getDefaultPlayerCenter() {
+  return [
+    (2 * DEFAULT_PLAYER_SPAWN[0] + PLAYER_SIZE) / 2,
+    (2 * DEFAULT_PLAYER_SPAWN[1] + PLAYER_SIZE) / 2,
+  ];
 }
