@@ -4,6 +4,7 @@ const DEFAULT_PLAYER_SPAWN = [100, 450];
 
 function Player() {
   this.pos = createVector(DEFAULT_PLAYER_SPAWN[0], DEFAULT_PLAYER_SPAWN[1]);
+  this.oldPos = [this.pos.x, this.pos.y];
   this.shouldImageInvert = true;
 
   this.display = function() {
@@ -15,6 +16,7 @@ function Player() {
   this.update = function() {
     this.display();
     this.displayCorners();
+    this.oldPos = [this.pos.x, this.pos.y];
   }
 
   this.getMovementDelta = function() {
@@ -114,6 +116,10 @@ function Player() {
       }
     }
     return false;
+  }
+
+  this.hasMoved = function() {
+    return this.pos.x !== this.oldPos[0] || this.pos.y !== this.oldPos[1];
   }
 }
 

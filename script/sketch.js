@@ -12,6 +12,11 @@ let playerImageInverted;
 let turtles = [];
 let player;
 let trust = 0;
+let framesPlayerImmobile = 0;
+let secondsPassed = 0;
+let currentFrame = 0;
+let keysPressedInOneSecond = 0;
+let secondSinceKeyPressed = 0;
 
 function preload() {
   bg = loadImage('../assets/background.jpg');
@@ -34,6 +39,9 @@ function setup() {
 function draw() {
   background(bg);
   drawTrustIndicator();
+  updatePlayerMobility();
+  updateSecondsPassed();
+  updateTrust();
   
   player.update();
   turtles.forEach((turtle) => {
@@ -48,6 +56,31 @@ function draw() {
     player.moveLeft();
   } if (keyIsDown(RIGHT_ARROW) || keyIsDown(KEY_D)) {
     player.moveRight();
+  } else {
+    keysPressedInOneSecond = 0;
+  }
+}
+
+function keyPressed() {
+  if (
+    keyIsDown(UP_ARROW) || keyIsDown(KEY_W) ||
+    keyIsDown(DOWN_ARROW) || keyIsDown(KEY_S) ||
+    keyIsDown(LEFT_ARROW) || keyIsDown(KEY_A) ||
+    keyIsDown(RIGHT_ARROW) || keyIsDown(KEY_D)
+  ) {
+    if (secondsPassed === secondSinceKeyPressed) {
+      keysPressedInOneSecond++;
+    }
+    secondSinceKeyPressed = secondsPassed;
+  }
+}
+
+function updateSecondsPassed() {
+  if (currentFrame < FRAMERATE) {
+    currentFrame++;
+  } else {
+    currentFrame = 0;
+    secondsPassed++;
   }
 }
 
@@ -75,5 +108,27 @@ function turtlesSpawnHelper() {
 function drawTrustIndicator() {
   fill('red');
   textSize(18);
-  text(`Confianza: ${Math.abs(trust)}%`, 15, 30);
+  text(`Confianza: ${Math.floor(trust)}%`, 15, 30);
+}
+
+function updatePlayerMobility() {
+  if (!player.hasMoved()) {
+    framesPlayerImmobile++;
+  } else {
+    framesPlayerImmobile = 0;
+  }
+}
+
+function updateTrust() {
+  if (keyIsDown(SHIFT)) {
+    trust -= 0.03;
+  }
+  if (framesPlayerImmobile < FRAMERATE * 3) {
+    trust += 0.03;
+  }
+  if (keysPressedInOneSecond > 1) {
+    trust -= 0.8;
+  }
+
+  trust = constrain(trust, 0, 100);
 }
