@@ -125,6 +125,10 @@ function Player() {
   this.hasMoved = function() {
     return this.pos.x !== this.oldPos[0] || this.pos.y !== this.oldPos[1];
   }
+
+  this.isCloseToAnyTurtle = function() {
+    return turtles.some((turtle) => turtle.playerIsTooClose());
+  }
 }
 
 function getDefaultPlayerCenter() {

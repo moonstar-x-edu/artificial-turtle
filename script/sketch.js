@@ -40,7 +40,6 @@ function setup() {
 
 function draw() {
   background(bg);
-  drawTrustIndicator();
   updatePlayerMobility();
   updateSecondsPassed();
   updateTrust();
@@ -49,6 +48,8 @@ function draw() {
   turtles.forEach((turtle) => {
     turtle.update();
   });
+
+  drawTrustIndicator();
 
   if (keyIsDown(UP_ARROW) || keyIsDown(KEY_W)) {
     player.moveForward();
@@ -108,7 +109,7 @@ function turtlesSpawnHelper() {
 }
 
 function drawTrustIndicator() {
-  fill('red');
+  fill('white');
   noStroke();
   textSize(18);
   text(`Confianza: ${Math.floor(trust)}%`, 15, 30);
@@ -132,6 +133,9 @@ function updateTrust() {
   if (keysPressedInOneSecond > 1) {
     trust -= 1;
     keysPressedInOneSecond = 0;
+  }
+  if (player.isCloseToAnyTurtle()) {
+    trust -= 0.1;
   }
 
   trust = constrain(trust, 0, 100);
