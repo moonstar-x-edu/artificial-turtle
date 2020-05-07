@@ -76,6 +76,7 @@ function Turtle(id) {
     this.updatePosition();
     this.display();
     this.displayCorners();
+    this.displayTrustRange();
   }
 
   this.getCenter = function() {
@@ -87,6 +88,7 @@ function Turtle(id) {
 
   this.displayCorners = function() {
     fill('white');
+    noStroke();
     rect(this.pos.x, this.pos.y, 2, 2);
     rect(this.pos.x, this.pos.y + TURTLE_SIZE, 2, 2);
     rect(this.pos.x + TURTLE_SIZE, this.pos.y, 2, 2);
@@ -108,5 +110,16 @@ function Turtle(id) {
       Math.abs(this.getCenter()[1] - getDefaultPlayerCenter()[1]) < MAX_DISTANCE_PT &&
       Math.abs(this.getCenter()[0] - getDefaultPlayerCenter()[0]) < MAX_DISTANCE_PT
     );
+  }
+
+  this.calculateTrustDiameter = function() {
+    return (TURTLE_SIZE / 0.2) * (1 - trust/100);
+  }
+
+  this.displayTrustRange = function() {
+    noFill();
+    stroke('black');
+    strokeWeight(2);
+    circle(this.getCenter()[0], this.getCenter()[1], this.calculateTrustDiameter());
   }
 }

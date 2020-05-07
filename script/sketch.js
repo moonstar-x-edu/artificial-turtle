@@ -107,6 +107,7 @@ function turtlesSpawnHelper() {
 
 function drawTrustIndicator() {
   fill('red');
+  noStroke();
   textSize(18);
   text(`Confianza: ${Math.floor(trust)}%`, 15, 30);
 }
@@ -121,10 +122,10 @@ function updatePlayerMobility() {
 
 function updateTrust() {
   if (keyIsDown(SHIFT)) {
-    trust -= 0.03;
+    trust -= 0.05;
   }
   if (framesPlayerImmobile < FRAMERATE * 3) {
-    trust += 0.03;
+    trust += 0.05;
   }
   if (keysPressedInOneSecond > 1) {
     trust -= 0.8;
