@@ -41,11 +41,24 @@ function Turtle() {
 
   this.updatePosition = function() {
     this.updateMovementDelta();
-    this.pos.x += this.movementDelta[0];
-    this.pos.y += this.movementDelta[1];
+    const updated = [
+      this.pos.x + this.movementDelta[0],
+      this.pos.y + this.movementDelta[1]
+    ];
 
-    this.pos.x = constrain(this.pos.x, 0, width - TURTLE_SIZE);
-    this.pos.y = constrain(this.pos.y, 0, height - TURTLE_SIZE);
+    const newCenter = [
+      (2 * updated[0] + TURTLE_SIZE) / 2,
+      (2 * updated[1] + TURTLE_SIZE) / 2,
+    ];
+
+    if (Math.abs(player.getCenter()[1] - newCenter[1]) < MAX_DISTANCE_PT
+      && Math.abs(player.getCenter()[0] - newCenter[0]) < MAX_DISTANCE_PT)
+    {
+      return;
+    }
+
+    this.pos.x = constrain(updated[0], 0, width - TURTLE_SIZE);
+    this.pos.y = constrain(updated[1], 0, height - TURTLE_SIZE);
   }
 
   this.update = function() {
