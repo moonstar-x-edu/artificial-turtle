@@ -51,5 +51,15 @@ function Turtle() {
   this.update = function() {
     this.updatePosition();
     this.display();
+    rect(this.pos.x, this.pos.y, 2, 2);
+    rect(this.pos.x, this.pos.y + TURTLE_SIZE, 2, 2);
+    rect(this.pos.x + TURTLE_SIZE, this.pos.y, 2, 2);
+  }
+
+  this.getCenter = function() {
+    return [
+      (2 * this.pos.x + TURTLE_SIZE) / 2,
+      (2 * this.pos.y + TURTLE_SIZE) / 2,
+    ];
   }
 }
