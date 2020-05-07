@@ -22,6 +22,8 @@ function setup() {
   for (let i = 0; i < 3; i++) {
     turtles.push(new Turtle());
   }
+
+  frameRate(30);
 }
 
 function draw() {

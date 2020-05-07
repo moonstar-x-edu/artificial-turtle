@@ -14,21 +14,25 @@ function Player() {
     this.display();
   }
 
+  this.getMovementDelta = function() {
+    return keyIsDown(SHIFT) ? 2 : 1;
+  }
+
   this.moveForward = function() {
-    this.pos.y = constrain(this.pos.y - 1, 0, height - PLAYER_SIZE);
+    this.pos.y = constrain(this.pos.y - this.getMovementDelta(), 0, height - PLAYER_SIZE);
   }
 
   this.moveBackward = function() {
-    this.pos.y = constrain(this.pos.y + 1, 0, height - PLAYER_SIZE);
+    this.pos.y = constrain(this.pos.y + this.getMovementDelta(), 0, height - PLAYER_SIZE);
   }
 
   this.moveRight = function() {
-    this.pos.x = constrain(this.pos.x + 1, 0, width - PLAYER_SIZE);
+    this.pos.x = constrain(this.pos.x + this.getMovementDelta(), 0, width - PLAYER_SIZE);
     this.shouldImageInvert = true;
   }
 
   this.moveLeft = function() {
-    this.pos.x = constrain(this.pos.x - 1, 0, width - PLAYER_SIZE);
+    this.pos.x = constrain(this.pos.x - this.getMovementDelta(), 0, width - PLAYER_SIZE);
     this.shouldImageInvert = false;
   }
 }
