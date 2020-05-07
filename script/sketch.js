@@ -1,4 +1,8 @@
 const FRAMERATE = 30;
+const KEY_W = 87;
+const KEY_A = 65;
+const KEY_D = 68;
+const KEY_S = 83;
 
 let bg;
 let turtleImage;
@@ -37,13 +41,13 @@ function draw() {
     turtle.update();
   });
 
-  if (keyIsDown(UP_ARROW)) {
+  if (keyIsDown(UP_ARROW) || keyIsDown(KEY_W)) {
     player.moveForward();
-  } if (keyIsDown(DOWN_ARROW)) {
+  } if (keyIsDown(DOWN_ARROW) || keyIsDown(KEY_S)) {
     player.moveBackward();
-  } if (keyIsDown(LEFT_ARROW)) {
+  } if (keyIsDown(LEFT_ARROW) || keyIsDown(KEY_A)) {
     player.moveLeft();
-  } if (keyIsDown(RIGHT_ARROW)) {
+  } if (keyIsDown(RIGHT_ARROW) || keyIsDown(KEY_D)) {
     player.moveRight();
   }
 }
