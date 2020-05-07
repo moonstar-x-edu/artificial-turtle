@@ -4,6 +4,8 @@ const KEY_A = 65;
 const KEY_D = 68;
 const KEY_S = 83;
 
+const debug = true;
+
 let bg;
 let turtleImage;
 let turtleImageInverted;
@@ -121,8 +123,8 @@ function updatePlayerMobility() {
 }
 
 function updateTrust() {
-  if (keyIsDown(SHIFT)) {
-    trust -= 0.05;
+  if (keyIsDown(SHIFT) && player.hasMoved()) {
+    trust -= 0.3;
   }
   if (framesPlayerImmobile < FRAMERATE * 3) {
     trust += 0.05;

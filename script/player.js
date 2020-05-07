@@ -15,8 +15,11 @@ function Player() {
 
   this.update = function() {
     this.display();
-    this.displayCorners();
     this.oldPos = [this.pos.x, this.pos.y];
+
+    if (debug) {
+      this.displayCorners();
+    }
   }
 
   this.getMovementDelta = function() {

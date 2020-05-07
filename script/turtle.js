@@ -24,6 +24,13 @@ function Turtle(id) {
   }
 
   this.updateMovementDelta = function() {
+    if (this.playerIsTooClose()) {
+      const { x, y } = this.getPlayerTurtleVectorUnitary();
+      this.movementDelta[0] = -x;
+      this.movementDelta[1] = -y;
+      return;
+    }
+
     this.frameCounter++;
     if (this.frameCounter >= this.movementThreshold) {
       if (this.shouldMove) {
@@ -75,8 +82,13 @@ function Turtle(id) {
   this.update = function() {
     this.updatePosition();
     this.display();
-    this.displayCorners();
-    this.displayTrustRange();
+    
+    if (debug) {
+      this.displayCorners();
+      this.displayTrustRange();
+      this.displayLineToPlayer();
+      this.displayTurtleID();
+    }
   }
 
   this.getCenter = function() {
@@ -112,14 +124,47 @@ function Turtle(id) {
     );
   }
 
-  this.calculateTrustDiameter = function() {
-    return (TURTLE_SIZE / 0.2) * (1 - trust/100);
+  this.calculateTrustRadius = function() {
+    return (TURTLE_SIZE / 0.2) * (1 - trust/100) / 2;
   }
 
   this.displayTrustRange = function() {
     noFill();
     stroke('black');
     strokeWeight(2);
-    circle(this.getCenter()[0], this.getCenter()[1], this.calculateTrustDiameter());
+    circle(this.getCenter()[0], this.getCenter()[1], 2 * this.calculateTrustRadius());
+  }
+
+  this.displayLineToPlayer = function() {
+    noFill();
+    stroke('black');
+    strokeWeight(1);
+    line(player.getCenter()[0], player.getCenter()[1], this.getCenter()[0], this.getCenter()[1]);
+  }
+
+  this.displayTurtleID = function() {
+    fill('red');
+    noStroke();
+    textSize(18);
+    text(this.id, this.getCenter()[0], this.getCenter()[1]);
+  }
+
+  this.getPlayerTurtleVector = function() {
+    return createVector(player.getCenter()[0] - this.getCenter()[0], player.getCenter()[1] - this.getCenter()[1]);
+  }
+
+  this.getPlayerTurtleVectorModulus = function() {
+    const { x, y } = this.getPlayerTurtleVector();
+    return Math.sqrt(x * x + y * y);
+  }
+
+  this.getPlayerTurtleVectorUnitary = function() {
+    const mod = this.getPlayerTurtleVectorModulus();
+    const vec = this.getPlayerTurtleVector();
+    return createVector(vec.x / mod, vec.y / mod);
+  }
+
+  this.playerIsTooClose = function() {
+    return this.getPlayerTurtleVectorModulus() < this.calculateTrustRadius();
   }
 }
