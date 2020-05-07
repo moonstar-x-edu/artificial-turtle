@@ -21,11 +21,11 @@ let keysPressedInOneSecond = 0;
 let secondSinceKeyPressed = 0;
 
 function preload() {
-  bg = loadImage('../assets/background.jpg');
-  turtleImage = loadImage('../assets/turtle.png');
-  turtleImageInverted = loadImage('../assets/turtle_inverted.png');
-  playerImage = loadImage('../assets/player.png');
-  playerImageInverted = loadImage('../assets/player_inverted.png');
+  bg = loadImage('/assets/background.jpg');
+  turtleImage = loadImage('/assets/turtle.png');
+  turtleImageInverted = loadImage('/assets/turtle_inverted.png');
+  playerImage = loadImage('/assets/player.png');
+  playerImageInverted = loadImage('/assets/player_inverted.png');
 }
 
 function setup() {
