@@ -4,7 +4,7 @@ const KEY_A = 65;
 const KEY_D = 68;
 const KEY_S = 83;
 
-let debug = true;
+let debug = false;
 
 let bg;
 let turtleImage;
