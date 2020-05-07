@@ -13,9 +13,7 @@ function Player() {
 
   this.update = function() {
     this.display();
-    rect(this.pos.x, this.pos.y, 2, 2);
-    rect(this.pos.x, this.pos.y + PLAYER_SIZE, 2, 2);
-    rect(this.pos.x + PLAYER_SIZE, this.pos.y, 2, 2);
+    this.displayCorners();
   }
 
   this.getMovementDelta = function() {
@@ -97,5 +95,12 @@ function Player() {
       (2 * this.pos.x + PLAYER_SIZE) / 2,
       (2 * this.pos.y + PLAYER_SIZE) / 2,
     ];
+  }
+
+  this.displayCorners = function() {
+    rect(this.pos.x, this.pos.y, 2, 2);
+    rect(this.pos.x, this.pos.y + PLAYER_SIZE, 2, 2);
+    rect(this.pos.x + PLAYER_SIZE, this.pos.y, 2, 2);
+    rect(this.pos.x + PLAYER_SIZE, this.pos.y + PLAYER_SIZE, 2, 2);
   }
 }
