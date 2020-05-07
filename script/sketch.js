@@ -4,7 +4,7 @@ const KEY_A = 65;
 const KEY_D = 68;
 const KEY_S = 83;
 
-const debug = true;
+let debug = true;
 
 let bg;
 let turtleImage;
@@ -70,7 +70,7 @@ function keyPressed() {
     keyIsDown(LEFT_ARROW) || keyIsDown(KEY_A) ||
     keyIsDown(RIGHT_ARROW) || keyIsDown(KEY_D)
   ) {
-    if (secondsPassed === secondSinceKeyPressed) {
+    if (secondsPassed < secondSinceKeyPressed + 1) {
       keysPressedInOneSecond++;
     }
     secondSinceKeyPressed = secondsPassed;
@@ -130,7 +130,8 @@ function updateTrust() {
     trust += 0.05;
   }
   if (keysPressedInOneSecond > 1) {
-    trust -= 0.8;
+    trust -= 1;
+    keysPressedInOneSecond = 0;
   }
 
   trust = constrain(trust, 0, 100);
