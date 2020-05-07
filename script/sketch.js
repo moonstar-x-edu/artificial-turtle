@@ -21,7 +21,8 @@ function setup() {
   canvas.parent("#app-holder");
   
   player = new Player();
-  for (let i = 0; i < 3; i++) {
+  const numOfTurtles = random(2, 4);
+  for (let i = 0; i < numOfTurtles; i++) {
     turtles.push(new Turtle());
   }
 
