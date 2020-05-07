@@ -1,3 +1,5 @@
+const FRAMERATE = 30;
+
 let bg;
 let turtleImage;
 let turtleImageInverted;
@@ -23,7 +25,7 @@ function setup() {
     turtles.push(new Turtle());
   }
 
-  frameRate(30);
+  frameRate(FRAMERATE);
 }
 
 function draw() {
