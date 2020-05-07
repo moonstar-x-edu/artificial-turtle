@@ -99,6 +99,7 @@ function Player() {
   }
 
   this.displayCorners = function() {
+    fill('white');
     rect(this.pos.x, this.pos.y, 2, 2);
     rect(this.pos.x, this.pos.y + PLAYER_SIZE, 2, 2);
     rect(this.pos.x + PLAYER_SIZE, this.pos.y, 2, 2);

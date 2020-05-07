@@ -86,6 +86,7 @@ function Turtle(id) {
   }
 
   this.displayCorners = function() {
+    fill('white');
     rect(this.pos.x, this.pos.y, 2, 2);
     rect(this.pos.x, this.pos.y + TURTLE_SIZE, 2, 2);
     rect(this.pos.x + TURTLE_SIZE, this.pos.y, 2, 2);

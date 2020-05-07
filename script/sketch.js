@@ -11,6 +11,7 @@ let playerImage;
 let playerImageInverted;
 let turtles = [];
 let player;
+let trust = 0;
 
 function preload() {
   bg = loadImage('../assets/background.jpg');
@@ -32,6 +33,7 @@ function setup() {
 
 function draw() {
   background(bg);
+  drawTrustIndicator();
   
   player.update();
   turtles.forEach((turtle) => {
@@ -68,4 +70,10 @@ function turtlesSpawnHelper() {
 
     turtles.push(turtle);
   }
+}
+
+function drawTrustIndicator() {
+  fill('red');
+  textSize(18);
+  text(`Confianza: ${Math.abs(trust)}%`, 15, 30);
 }
