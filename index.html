@@ -5,8 +5,48 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300|Roboto+Condensed:700|Lobster">
     <link type="text/css" rel="stylesheet" href="./style/index.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+    <script src="./script/arrowScrollDisable.js"></script>
+    <script src="./script/sketch.js"></script>
+    <script src="./script/turtle.js"></script>
+    <script src="./script/player.js"></script>
+    <script src="script/toggleDebug.js"></script>
   </head>
   <body>
-    <h1>Under construction...</h1>
+    <h1 class="title">
+      Tortuga Artificial
+    </h1>
+    <div class="box">
+      <p>Para observar los radios de confianza de las tortugas y sus vectores con relación al robot:</p>
+      <span id="debug-button">Haz click aquí</span>
+    </div>
+    <div id="app-holder"></div>
+    <div class="instructions box">
+      <h2>
+        Cómo Jugar:
+      </h2>
+      <p>
+        Utiliza las <span class="key-highlight">flechas</span> o <span class="key-highlight">WASD</span> para controlar el movimiento del robot. También puedes mantener <span class="key-highlight">SHIFT</span> para moverte más rápido.
+      </p>
+    </div>
+    <div class="explanation box">
+      <h2>
+        Qué hay detrás de este juego:
+      </h2>
+      <p>
+        En este juego se pretende observar la interacción entre seres vivos y robots que se hacen pasar por miembros de la misma especie. A través de este juego, se pretende analizar las relaciones entre
+        lo natural y lo cibernético, un tema de bastante relevancia, especialmente con el rítmo tan acelerado de evolución científica y tecnológica en la que estamos viviendo.
+        Inicialmente, este proyecto empezó con la idea de introducir una tortuga impresa en 3D y controlada a través de un Arduino en una laguna llena de tortugas, observadas por una cámara en el POV de la tortuga robótica.
+        El comportamiento de las tortugas en este juego se asemeja a como las tortugas actúan frente a seres desconocidos (analizado empíricamente).
+      </p>
+      <p>
+        Aquí, el jugador controla a la tortuga robot mientras que las demás tortugas "naturales" se mueven aleatoriamente. Además, el jugador posee un grado de confianza que le tienen las tortugas,
+        el moverse normalmente aumenta la confianza mientras que moverse erráticamente (hacer spam de los botones de movimiento), acercarse mucho a ellas sin la debida confianza y correr, la disminuyen.
+        Quedarse quieto tampoco es mucha opción ya que la confianza de las tortugas no cambia cuando el robot está quieto. Mientras más confianza tengan las tortugas, más se puede acercar el jugador a ellas.
+        Caso contrario, acercarse a las tortugas sin la debida confianza causará que ellas intenten escapar del jugador. 
+      </p>
+    </div>
+    <footer>
+      El juego fue realizado en p5.js y JavaScript.
+    </footer>
   </body>
 </html>
