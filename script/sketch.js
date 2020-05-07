@@ -27,7 +27,7 @@ function setup() {
   player = new Player();
   const numOfTurtles = random(2, 4);
   for (let i = 0; i < numOfTurtles; i++) {
-    turtles.push(new Turtle());
+    turtles.push(new Turtle(i));
   }
 
   frameRate(FRAMERATE);

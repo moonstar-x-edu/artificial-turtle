@@ -1,12 +1,13 @@
 const TURTLE_SIZE = 70;
 
-function Turtle() {
+function Turtle(id) {
   this.pos = createVector(random(0, width - TURTLE_SIZE), random(0, height - TURTLE_SIZE));
   this.movementThreshold = random(1, 2) * FRAMERATE;
   this.frameCounter = random(0, FRAMERATE);
   this.movementDelta = [0, 0];
   this.shouldMove = false;
   this.image = turtleImage;
+  this.id = id;
 
   this.display = function() {
     if (this.movementDelta[0] < 0) {
@@ -55,6 +56,16 @@ function Turtle() {
       && Math.abs(player.getCenter()[0] - newCenter[0]) < MAX_DISTANCE_PT)
     {
       return;
+    }
+    for (const turtle of turtles) {
+      if (turtle.id === this.id) {
+        continue;
+      }
+      
+      if (Math.abs(newCenter[1] - turtle.getCenter()[1]) < MAX_DISTANCE_PT
+      && Math.abs(newCenter[0] - turtle.getCenter()[0]) < MAX_DISTANCE_PT) {
+        return;
+      }
     }
 
     this.pos.x = constrain(updated[0], 0, width - TURTLE_SIZE);
